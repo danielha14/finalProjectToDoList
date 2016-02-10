@@ -21,7 +21,6 @@ body {
 	padding-bottom: 40px;
 }
 
-
 /* Custom container */
 .container-narrow {
 	margin: 0 auto;
@@ -60,34 +59,23 @@ body {
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">todo list</a>
-        </div>
-       
-        <div id="navbar" class="navbar-collapse collapse">
-      
-          <form action="signin" method="post" class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-         
-        </div>
-        
-      </div>
-    </nav>
-	
+
+	<div class="container-narrow">
+
+		<div class="masthead">
+			<ul class="nav nav-pills pull-right">
+				<li class="active"><a href="toregister">register</a></li>
+				<li><a href="login">login</a></li>
+				<li><a href="about">about</a></li>
+			</ul>
+			<h3 class="muted">TodoLis </h3>
+		</div>
+		<div class="jumbotron">
+			<h1>TodoList  </h1>
+			
+			<a class="btn btn-large btn-success" href="#">watch the video</a>
+		</div>
+	</div>
+
 </body>
 </html>

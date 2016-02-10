@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
 
+import org.apache.log4j.Logger;
+
 import com.project.todolist.model.HibernateToDoListDAO;
 import com.project.todolist.model.IToDoListDAO;
 import com.project.todolist.model.ToDoItem;
@@ -28,7 +30,7 @@ import com.sun.xml.internal.bind.v2.runtime.unmarshaller.InterningXmlVisitor;
 @WebServlet("/controller/*")
 public class ToDoListPlatformConroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	static final Logger	logger	= Logger.getLogger(ToDoListPlatformConroller.class);
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -43,6 +45,7 @@ public class ToDoListPlatformConroller extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
+		logger.info("----------->doGet() start");
 		PrintWriter writer = response.getWriter();
 		StringBuffer sb = request.getRequestURL();
 		String url = sb.toString();
@@ -55,17 +58,20 @@ public class ToDoListPlatformConroller extends HttpServlet {
 		else
 			if (url.endsWith("login"))
 			{
+				logger.info("----------->login page");
 				dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 				dispatcher.forward(request, response);
 			}
 			else
 				if (url.endsWith("toregister"))
 				{
+					logger.info("----------->register page");
 					dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
 					dispatcher.forward(request, response);
 				}
 				else
 					if (url.endsWith("addItem")) {
+						logger.info("----------->adding item page");
 						HibernateToDoListDAO model = HibernateToDoListDAO.getInstance();
 						List listOfUserItems = null;
 						String title = request.getParameter("title");
@@ -89,6 +95,7 @@ public class ToDoListPlatformConroller extends HttpServlet {
 					} 
 					else
 						if (url.endsWith("signin")) {
+							logger.info("----------->signin page");
 							HibernateToDoListDAO model = HibernateToDoListDAO.getInstance();
 							String userEmail = request.getParameter("email");
 							String userPassword = request.getParameter("password");
@@ -132,6 +139,7 @@ public class ToDoListPlatformConroller extends HttpServlet {
 						else
 							if(url.endsWith("useritems"))
 							{
+								logger.info("----------->useritems page");
 								HibernateToDoListDAO model = HibernateToDoListDAO.getInstance();
 								User user = (User)request.getSession().getAttribute("user");
 								List listOfUserItems = null;
@@ -152,6 +160,7 @@ public class ToDoListPlatformConroller extends HttpServlet {
 							else
 								if (url.endsWith("UpdateItem"))
 								{
+									logger.info("----------->UpdateItem button");
 									HibernateToDoListDAO model = HibernateToDoListDAO.getInstance();
 									List<ToDoItem> listOfUserItems = null;
 									String title = request.getParameter("title");
@@ -179,6 +188,7 @@ public class ToDoListPlatformConroller extends HttpServlet {
 								else 
 									if (url.endsWith("delete")) 
 									{
+										logger.info("----------->delete button");
 										HibernateToDoListDAO model = HibernateToDoListDAO.getInstance();
 										List listOfUserItems = null;
 										User user = (User)request.getSession().getAttribute("user");
@@ -202,6 +212,7 @@ public class ToDoListPlatformConroller extends HttpServlet {
 									else
 										if (url.endsWith("register"))
 										{
+											logger.info("----------->register page");
 											HibernateToDoListDAO model = HibernateToDoListDAO.getInstance();
 											String userName = request.getParameter("userName");
 											String userEmail = request.getParameter("email");
@@ -222,9 +233,22 @@ public class ToDoListPlatformConroller extends HttpServlet {
 											}
 										}
 										else
-											if (url.endsWith("Item"))
+											if (url.endsWith("logout"))
 											{
-												dispatcher = getServletContext().getRequestDispatcher("/addnewitem.jsp");
+												logger.info("----------->logout page");
+												//remove session
+												request.getSession().removeAttribute("user");
+												request.getSession().removeAttribute("listOfUserItems");
+												//remove cookie
+												Cookie[] cookies = request.getCookies();
+												for (Cookie cooki : cookies) {
+													if(cooki.getName().equals("userName")){
+														cooki.setMaxAge(0);	
+														response.addCookie(cooki);
+													}									
+												}
+											
+												dispatcher = getServletContext().getRequestDispatcher("/home.jsp");
 												dispatcher.forward(request, response);
 
 											}
@@ -240,6 +264,7 @@ public class ToDoListPlatformConroller extends HttpServlet {
 													dispatcher = getServletContext().getRequestDispatcher("/error.jsp");
 													dispatcher.forward(request, response);
 												}
+		logger.info("----------->doGet() terminate");
 	}
 
 	/**

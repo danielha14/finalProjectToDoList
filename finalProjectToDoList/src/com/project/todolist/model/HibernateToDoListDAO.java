@@ -3,6 +3,8 @@ package com.project.todolist.model;
 
 import java.util.Arrays;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -13,7 +15,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
  * The Class HibernateToDoListDAO.
  */
 public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
-
+	static final Logger	logger	= Logger.getLogger(HibernateToDoListDAO.class);
 	/** The factory. */
 	private SessionFactory factory = null;
 
@@ -24,7 +26,7 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 	 * Constructor HibernateToDoListDAO.
 	 */
 	private HibernateToDoListDAO(){
-
+		logger.info("----------->HibernateToDoListDAO() constructor");
 
 		factory = new AnnotationConfiguration().configure().buildSessionFactory();
 
@@ -36,6 +38,7 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 	 * @return single instance of HibernateToDoListDAO
 	 */
 	public static HibernateToDoListDAO getInstance() {
+		logger.info("----------->getInstance() ");
 		if (instance == null) {
 			instance = new HibernateToDoListDAO();
 		}
@@ -47,6 +50,7 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 	 */
 	@Override
 	public void addUser(User user) throws TodoListPlatformException {
+		logger.info("----------->addUser()");
 		Session session = factory.openSession();
 		try{
 
@@ -76,6 +80,7 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 
 	public boolean CheckIfUserExist( String userEmail )
 	{
+		logger.info("----------->CheckIfUserExist()");
 		Session session = factory.openSession();
 		boolean isExist = false;
 		if(session.get(User.class,userEmail) != null);
@@ -86,6 +91,7 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 	}
 	@Override
 	public User getUserByEmail(String email) throws TodoListPlatformException {
+		logger.info("----------->getUserByEmail()");
 		Session session = factory.openSession();
 		User user = null;
 		try{
@@ -120,7 +126,8 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 	
    @Override
 	public boolean authenticateUser(String userEmail, String password) throws TodoListPlatformException {
-		boolean isAuthenticateUser  = false;
+	   logger.info("----------->authenticateUser()");
+	   boolean isAuthenticateUser  = false;
 		User user = getUserByEmail(userEmail);         
 		if(user!=null && user.getEmail().equals(userEmail) && user.getPassword().equals(password))
 		{
@@ -134,6 +141,7 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 	 */
 	@Override
 	public boolean deleteUser(User user) throws TodoListPlatformException {
+		logger.info("----------->deleteUser()");
 		Session session = factory.openSession();
 		try{
 			session.beginTransaction();
@@ -170,6 +178,7 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 	 */
 	@Override
 	public void updateUser(User userToUpdate) throws TodoListPlatformException{
+		logger.info("----------->updateUser()");
 		Session session = factory.openSession();
 		try{
 
@@ -202,6 +211,7 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 	 */
 	@Override
 	public void addItem(ToDoItem itemFromUserToAdd) throws TodoListPlatformException {
+		logger.info("----------->addItem()");
 		Session session = factory.openSession();
 		try{
 
@@ -267,6 +277,7 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 	 * @see com.abelski.samples.hibernate.IToDoListDAO#updateItem(com.abelski.samples.hibernate.ToDoItem)
 	 */
 	public void updateItem(ToDoItem itemFromUserToUpdate) throws TodoListPlatformException {
+		logger.info("----------->updateItem()");
 		Session session = factory.openSession();
 		try{
 			session.beginTransaction();
@@ -299,6 +310,7 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 	@SuppressWarnings("finally")
 	@Override
 	public List getItems() throws TodoListPlatformException {
+		logger.info("----------->getItems()");
 		Session session = factory.openSession();
 		List items = null;
 		try{
@@ -332,6 +344,7 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 	@SuppressWarnings("finally")
 	@Override
 	public List<ToDoItem> getUserItems(String email) throws TodoListPlatformException {
+		logger.info("----------->getUserItems()");
 		Session session = factory.openSession();
 		List items = null;
 		try{
@@ -364,6 +377,7 @@ public class HibernateToDoListDAO implements IToDoListDAO , IToDoListUser{
 	
 	@Override
 	public ToDoItem getItemById(int itemId) throws TodoListPlatformException {
+		logger.info("----------->getItemById()");
 		Session session = factory.openSession();
 		ToDoItem item = null;
 		try{

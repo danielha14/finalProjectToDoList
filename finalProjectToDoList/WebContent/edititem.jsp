@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1255">
-<title>Insert title here</title>
+
 </head>
 <body>
 
@@ -18,6 +17,7 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
+          	<input type="hidden" class="form-control">
             <label for="recipient-name" class="control-label">Recipient:</label>
             <input type="text" class="form-control" id="recipient-name">
           </div>

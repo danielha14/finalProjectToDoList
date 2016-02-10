@@ -7,17 +7,6 @@ var itemid = 0 ;
 $(function(){
     var $template = $(".template");
     var hash = 2;
-
-//$('#signinid').click(function(){
-//	$.ajax({
-//		url : 'controller/addItem',
-//		data : {email:$('email').val(),
-//			password:$('password').val()},
-//			success : function(ressponse){
-//				$('#ajaxGetUserServletResponse').text(responseText);
-//			}
-//	});
-//});
   
 //add todoItem
     $(".btn-add-panel").on("click",function(){
@@ -47,7 +36,7 @@ $(function(){
 
     $("h3").hide().show(2000);
 
-    $('#exampleModal').on('show.bs.modal', function (event) {
+    $('#Update').on('show.bs.modal', function (event) {
     	  var button = $(event.relatedTarget) // Button that triggered the modal
     	  var recipient = button.data('whatever') // Extract info from data-* attributes
     	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -55,6 +44,6 @@ $(function(){
     	  var modal = $(this)
     	  modal.find('.modal-title').text('New message to ' + recipient)
     	  modal.find('.modal-body input').val(recipient)
-    	})
+    	});
   	
 });
