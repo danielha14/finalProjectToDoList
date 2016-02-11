@@ -41,6 +41,14 @@ public interface IToDoListDAO {
 	 */
 	public List<ToDoItem> getItems() throws TodoListPlatformException ;
 	
+	/**
+	 * Gets the users.
+	 *
+	 * @return  list of all the users
+	 * @throws TodoListPlatformException the todo list platform exception
+	 */
+	public List<User> getUsers() throws TodoListPlatformException ;
+	
 	public List<ToDoItem> getUserItems(String userId) throws TodoListPlatformException ;
 	public ToDoItem getItemById(int itemId)throws TodoListPlatformException ;
 

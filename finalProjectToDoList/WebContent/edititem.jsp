@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=windows-1255"
     pageEncoding="windows-1255"%>
-<!DOCTYPE html>
-<html>
-<head>
-
-</head>
-<body>
 
 <div class="modal fade" id="Update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog" role="document">
@@ -35,9 +29,6 @@
   </div>
 </div>
 
-
-</body>
-</html>
 
 
 	

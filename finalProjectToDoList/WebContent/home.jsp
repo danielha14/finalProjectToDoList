@@ -14,7 +14,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="bootstrap/js/appjs.js"></script>
+<script src="js/appjs.js"></script>
 <style type="text/css">
 body {
 	padding-top: 20px;
@@ -65,17 +65,18 @@ body {
 		<div class="masthead">
 			<ul class="nav nav-pills pull-right">
 				<li class="active"><a href="toregister">register</a></li>
-				<li><a href="login">login</a></li>
+				<li class="active"><a href="login"><span
+						class="glyphicon glyphicon-log-in"></span> login</a></li>
 				<li><a href="about">about</a></li>
 			</ul>
-			<h3 class="muted">TodoLis </h3>
+			<h3 class="muted">TodoLis</h3>
 		</div>
 		<div class="jumbotron">
-			<h1>TodoList  </h1>
-			
+			<h1>TodoList App</h1>
+
 			<a class="btn btn-large btn-success" href="#">watch the video</a>
 		</div>
 	</div>
-
+	
 </body>
 </html>

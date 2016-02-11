@@ -145,8 +145,7 @@ public class ToDoListPlatformConroller extends HttpServlet {
 								List listOfUserItems = null;
 								try {	
 									listOfUserItems = model.getUserItems(user.getEmail());
-									request.getSession().setAttribute("listOfUserItems", listOfUserItems);
-									request.getSession().setAttribute("user", user);
+									request.getSession().setAttribute("listOfUserItems", listOfUserItems);									
 									dispatcher = getServletContext().getRequestDispatcher("/useritems.jsp");
 									dispatcher.forward(request, response);
 								}

@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=windows-1255"
     pageEncoding="windows-1255"%>
-<!DOCTYPE html>
-<html>
-<head>
 
-<title>Add new item</title>
-</head>
-<body>
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
   Add new item
 </button>
@@ -44,5 +38,3 @@
 			</div>
 		</div>
 </div>
-</body>
-</html>
