@@ -18,6 +18,16 @@
 <div class="container">
     <div class="jumbotron">
         <h1 align="center">Log In</h1>
+        		<%
+				Cookie[] cookies = request.getCookies();
+				for (Cookie cooki : cookies) {
+					if (cooki.getName().equals("userName")) {
+						out.println("<p> Welcome " + "<span  style='color:blue'>" + cooki.getValue() + "</span > </p>");
+						break;
+					}
+				}
+				
+			%>
     </div>
 
     <div class="row">

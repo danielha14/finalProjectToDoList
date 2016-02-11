@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=windows-1255"
+<%@ page language="java" contentType="text/html; charset=windows-1255" 
     pageEncoding="windows-1255" isErrorPage="true"%>
 <!DOCTYPE html>
 <html>

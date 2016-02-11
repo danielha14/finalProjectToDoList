@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=windows-1255"
     pageEncoding="windows-1255"%>
 
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Add new item
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+<span class="glyphicon glyphicon-plus"></span>
+  Add New Item
 </button>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

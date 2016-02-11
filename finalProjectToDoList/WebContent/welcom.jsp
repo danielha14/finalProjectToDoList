@@ -21,55 +21,11 @@
 			<h1>
 				ToDo List <span class="glyphicon glyphicon-leaf"></span>
 			</h1>
-			<%
-				String str = "Guest";
-				Cookie[] cookies = request.getCookies();
-				for (Cookie cooki : cookies) {
-					if (cooki.getName().equals("userName")) {
-						str = cooki.getValue();
-						break;
-					}
-				}
-				out.println("<p> Welcome " + "<span  style='color:blue'>" + str + "</span > </p>");
-			%>
+	
 		</div>
 		<!--jumbotron-->
-		<div class="page-header">
-			<div class="row">
-				<div class="col-md-2">
-					<a href="#" class="btn btn-primary" role="button"> <span
-						class="glyphicon glyphicon-home"></span> Home
-					</a>
-				</div>
-
-				<div class="col-md-2">
-					<a href="useritems" class="btn btn-success" role="button"> <span
-						class="glyphicon glyphicon-th-list"></span> TodoList
-					</a>
-				</div>
-
-				<div class="col-md-2">
-					<form action="controller/servies" method="post">
-						<a href="#" class="btn btn-info" type="submit" role="button">
-							<span class="glyphicon glyphicon-search"></span> About
-						</a>
-					</form>
-				</div>
-
-				<div class="col-md-2">
-					<a href="#" class="btn btn-warning" role="button"> <span
-						class="glyphicon glyphicon-envelope"></span> Help
-					</a>
-				</div>
-				<div class="col-md-2">
-					<a href="logout" class="btn btn-warning" role="button"> <span
-						class="glyphicon glyphicon-log-out"></span> Logout
-					</a>
-				</div>
-			</div>
-			<!--header row-->
-		</div>
-		<!--header-->
+		<%@ include file="navbar.jsp" %>
+		
 
 		<h1>
 			<span class="glyphicon glyphicon-leaf"></span> Hello ! Welcome to

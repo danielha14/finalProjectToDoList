@@ -1,8 +1,6 @@
 package com.project.todolist.model;
 
-import java.util.Arrays;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -28,7 +26,6 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 		logger.info("----------->HibernateToDoListDAO() constructor");
 
 		factory = new AnnotationConfiguration().configure().buildSessionFactory();
-
 	}
 
 	/**
@@ -44,12 +41,12 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 		return instance;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.abelski.samples.hibernate.IToDoListUser#addUser(com.abelski.samples.
-	 * hibernate.User)
+	/**
+	 * addUser
+	 * add new user to the database.
+	 *
+	 * @param userToAdd the user to add
+	 * @exception TodoListPlatformException the todo list platform exception
 	 */
 	@Override
 	public void addUser(User user) throws TodoListPlatformException {
@@ -58,8 +55,6 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 		try {
 
 			session.beginTransaction();
-			// if(!(session.get(user.getClass(),user.getEmail()) != null))
-			// {
 			session.save(user);
 			session.getTransaction().commit();
 		} catch (HibernateException e) {
@@ -81,18 +76,55 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 		}
 	}
 
-	public boolean CheckIfUserExist(String userEmail) {
+	/**
+	 * Check if user exist.
+	 *
+	 * @param userEmail the user email
+	 * @return true, if successful
+	 * @throws TodoListPlatformException the todo list platform exception
+	 */
+	public boolean CheckIfUserExist(String userEmail) throws TodoListPlatformException {
 		logger.info("----------->CheckIfUserExist()");
 		Session session = factory.openSession();
 		boolean isExist = false;
-		if (session.get(User.class, userEmail) != null)
-			;
-		{
-			isExist = true;
+		try {
+
+			session.beginTransaction();
+			if (session.get(User.class, userEmail) != null)
+				
+			{
+				isExist = true;
+			}
+		}
+		catch (HibernateException e) {
+			if (session.getTransaction() != null) {
+
+				session.getTransaction().rollback();
+				throw new TodoListPlatformException(e.getMessage());
+			}
+		}
+		finally {
+			try {
+				session.close();
+			} catch (HibernateException e) {
+				if (session.getTransaction() != null) {
+					session.getTransaction().rollback();
+					throw new TodoListPlatformException(e.getMessage());
+				}
+
+			}
 		}
 		return isExist;
 	}
-
+	
+	
+	/**
+	 * Gets the user by email.
+	 *
+	 * @param email the email
+	 * @return the user by email
+	 * @throws TodoListPlatformException the todo list platform exception
+	 */
 	@Override
 	public User getUserByEmail(String email) throws TodoListPlatformException {
 		logger.info("----------->getUserByEmail()");
@@ -124,6 +156,15 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 		return user;
 	}
 
+	
+	/**
+	 * Authenticate user.
+	 *
+	 * @param userEmai the user email
+	 * @param password the password
+	 * @return true, if successful
+	 * @throws TodoListPlatformException the todo list platform exception
+	 */
 	@Override
 	public boolean authenticateUser(String userEmail, String password) throws TodoListPlatformException {
 		logger.info("----------->authenticateUser()");
@@ -135,11 +176,13 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 		return isAuthenticateUser;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.abelski.samples.hibernate.IToDoListUser#deleteUser(com.abelski.
-	 * samples.hibernate.User)
+	/**
+	 * deleteUser
+	 * delete user from the  database.
+	 *
+	 * @param userToDelete the user to delete
+	 * @return true, if successful
+	 * @exception TodoListPlatformException the todo list platform exception
 	 */
 	@Override
 	public boolean deleteUser(User user) throws TodoListPlatformException {
@@ -172,11 +215,12 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.abelski.samples.hibernate.IToDoListUser#updateUser(com.abelski.
-	 * samples.hibernate.User)
+	/**
+	 * updateUser
+	 * update existing  user in the database.
+	 *
+	 * @param userToUpdate the user to update
+	 * @exception TodoListPlatformException the todo list platform exception
 	 */
 	@Override
 	public void updateUser(User userToUpdate) throws TodoListPlatformException {
@@ -208,12 +252,12 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.abelski.samples.hibernate.IToDoListDAO#addItem(com.abelski.samples.
-	 * hibernate.ToDoItem)
+	/**
+	 * addItem
+	 * add item to the items database.
+	 *
+	 * @param item the item
+	 * @exception TodoListPlatformException the todo list platform exception
 	 */
 	@Override
 	public void addItem(ToDoItem itemFromUserToAdd) throws TodoListPlatformException {
@@ -245,12 +289,12 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.abelski.samples.hibernate.IToDoListDAO#deleteItem(com.abelski.samples
-	 * .hibernate.ToDoItem)
+	/**
+	 * deleteItem
+	 * delete item from the  database.
+	 * @param item the item
+	 * @return true, if successful
+	 * @exception TodoListPlatformException the todo list platform exception
 	 */
 	@Override
 	public boolean deleteItem(ToDoItem itemFromUserToDelete) throws TodoListPlatformException {
@@ -281,12 +325,13 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.abelski.samples.hibernate.IToDoListDAO#updateItem(com.abelski.samples
-	 * .hibernate.ToDoItem)
+
+	/**
+	 * updateItem
+	 * update existing item in the database.
+	 *
+	 * @param item the item
+	 * @exception TodoListPlatformException the todo list platform exception
 	 */
 	public void updateItem(ToDoItem itemFromUserToUpdate) throws TodoListPlatformException {
 		logger.info("----------->updateItem()");
@@ -316,43 +361,13 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.abelski.samples.hibernate.IToDoListDAO#getItems()
+
+	/**
+	 * Gets the users.
+	 *
+	 * @return  list of all the users
+	 * @throws TodoListPlatformException the todo list platform exception
 	 */
-	@SuppressWarnings({ "finally", "unchecked" })
-	@Override
-	public List<ToDoItem> getItems() throws TodoListPlatformException {
-		logger.info("----------->getItems()");
-		Session session = factory.openSession();
-		List<ToDoItem> items = null;
-		try {
-			session.beginTransaction();
-			items = (List<ToDoItem>)session.createQuery("from ToDoItem").list();
-
-		} catch (HibernateException e) {
-			if (session.getTransaction() != null) {
-
-				session.getTransaction().rollback();
-				throw new TodoListPlatformException("error with getItems method");
-			}
-
-		} finally {
-			try {
-				session.close();
-			} catch (HibernateException e) {
-				if (session.getTransaction() != null) {
-					session.getTransaction().rollback();
-					throw new TodoListPlatformException("error with getItems method");
-				}
-
-			}
-			return items;
-		}
-
-	}
-
 	@SuppressWarnings({ "finally", "unchecked" })
 	@Override
 	public List<User> getUsers() throws TodoListPlatformException {
@@ -384,12 +399,19 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 		}
 	}
 
+	/**
+	 * Gets the user items.
+	 *
+	 * @param userId the user id
+	 * @return the user items
+	 * @throws TodoListPlatformException the todo list platform exception
+	 */
 	@SuppressWarnings("finally")
 	@Override
 	public List<ToDoItem> getUserItems(String email) throws TodoListPlatformException {
 		logger.info("----------->getUserItems()");
 		Session session = factory.openSession();
-		List items = null;
+		List<ToDoItem> items = null;
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery("from ToDoItem where USERID like '%" + email + "%'");
@@ -416,7 +438,13 @@ public class HibernateToDoListDAO implements IToDoListDAO, IToDoListUser {
 			return items;
 		}
 	}
-
+	/**
+	 * Gets the item by id.
+	 *
+	 * @param itemId the item id
+	 * @return the items by id
+	 * @throws TodoListPlatformException the todo list platform exception
+	 */
 	@Override
 	public ToDoItem getItemById(int itemId) throws TodoListPlatformException {
 		logger.info("----------->getItemById()");

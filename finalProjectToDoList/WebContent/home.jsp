@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=windows-1255"
+<%@ page language="java" contentType="text/html; charset=windows-1255" errorPage="error.jsp"
 	pageEncoding="windows-1255"%>
+	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,9 +68,8 @@ body {
 				<li class="active"><a href="toregister">register</a></li>
 				<li class="active"><a href="login"><span
 						class="glyphicon glyphicon-log-in"></span> login</a></li>
-				<li><a href="about">about</a></li>
 			</ul>
-			<h3 class="muted">TodoLis</h3>
+			<h3 class="muted">TodoList</h3>
 		</div>
 		<div class="jumbotron">
 			<h1>TodoList App</h1>

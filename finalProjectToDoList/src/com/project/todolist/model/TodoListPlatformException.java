@@ -8,7 +8,7 @@ public class TodoListPlatformException extends Exception {
 	/**
 	 * Constructor .
 	 *
-	 * @param msg 
+	 * @param message 
 	 */
 	public TodoListPlatformException(String msg) {
 		super(msg);
@@ -17,7 +17,7 @@ public class TodoListPlatformException extends Exception {
 	/**
 	 * Constructor .
 	 *
-	 * @param msg the msg
+	 * @param message
 	 * @param throwable the throwable
 	 */
 	public TodoListPlatformException(String msg, Throwable throwable) {

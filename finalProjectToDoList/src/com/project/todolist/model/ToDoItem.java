@@ -50,6 +50,11 @@ public class ToDoItem
 
 	}
 	
+	public ToDoItem( String title, String description , String userId) 
+	{
+		this(0,title,description,userId);
+		
+	}
 	/**
 	 * Gets the title.
 	 *

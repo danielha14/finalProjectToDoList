@@ -13,9 +13,14 @@ import javax.ws.rs.Path;
 @Path("/userlist")
 public class UsersListJersey {
 
+	/**
+	 * Gets the users list.
+	 *
+	 * @return the users list
+	 */
 	@GET
 	@Produces("text/html")
-	public String getClichedMessage() {
+	public String getUsersList() {
 		String result = "<h1>List of the Users</h1> <br/>";
 		try {
 			HibernateToDoListDAO model = HibernateToDoListDAO.getInstance();
